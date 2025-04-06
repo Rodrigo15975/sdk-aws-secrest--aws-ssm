@@ -10,18 +10,10 @@ export class UsersService {
     private readonly prismaService: PrismaService,
     private readonly configService: ConfigService,
   ) {}
-  create(createUserDto: CreateUserDto) {
+  create() {
     return this.prismaService.user.create({
       data: {
         name: 'Ready',
-        profile: {
-          connectOrCreate: {
-            create: {},
-            where: {
-              user_id: '',
-            },
-          },
-        },
       },
     })
   }
