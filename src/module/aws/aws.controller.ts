@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common'
+import { Controller, Get, Param, Query } from '@nestjs/common'
 import { AwsService } from './aws.service'
 
 @Controller('aws')
@@ -12,6 +12,18 @@ export class AwsController {
     })
 
     const secrets = await this.awsService.getSecretManager(secretId)
+    console.log({
+      secrets,
+    })
+    return secrets
+  }
+  @Get('createSecret')
+  async createSecret(@Query('secretId') secretId: string) {
+    console.log({
+      secretId,
+    })
+
+    const secrets = await this.awsService.createSecretManager(secretId)
     console.log({
       secrets,
     })
