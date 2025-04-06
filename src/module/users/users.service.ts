@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common'
-import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { PrismaService } from 'nestjs-prisma'
 import { ConfigService } from '@nestjs/config'
@@ -24,6 +23,14 @@ export class UsersService {
     return this.prismaService.user.create({
       data: {
         name: 'Rodrigo',
+        profile: {
+          connectOrCreate: {
+            create: {},
+            where: {
+              user_id: '',
+            },
+          },
+        },
       },
       include: {
         profile: true,
