@@ -10,15 +10,31 @@ export class UsersService {
     private readonly prismaService: PrismaService,
     private readonly configService: ConfigService,
   ) {}
-  async create(createUserDto: CreateUserDto) {}
+  create(createUserDto: CreateUserDto) {
+    return this.prismaService.user.create({
+      data: {
+        name: 'Ready',
+        profile: {
+          connectOrCreate: {
+            create: {},
+            where: {
+              user_id: '',
+            },
+          },
+        },
+      },
+    })
+  }
 
   findAll() {
-    console.log(this.configService.get('DATABASE_URL'))
     console.log(this.configService.get('DB_USER'))
     console.log(this.configService.get('DB_PASSWORD'))
     return this.prismaService.user.create({
       data: {
         name: 'Rodrigo',
+      },
+      include: {
+        profile: true,
       },
     })
   }
