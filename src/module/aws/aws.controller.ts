@@ -7,10 +7,6 @@ export class AwsController {
 
   @Get('secret/:secretId')
   async getSecret(@Param('secretId') secretId: string) {
-    console.log({
-      secretId,
-    })
-
     const secrets = await this.awsService.getSecretManager(secretId)
     console.log({
       secrets,
