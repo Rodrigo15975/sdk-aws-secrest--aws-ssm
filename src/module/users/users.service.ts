@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, Logger } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { PrismaService } from 'nestjs-prisma'
 
@@ -17,7 +17,7 @@ export class UsersService {
   }
 
   findAll() {
-    console.log(this.configService.get('DB_USER'))
+    Logger.debug(this.configService.get('DB_USER'))
     console.log(this.configService.get('DB_PASSWORD'))
     return this.prismaService.user.create({
       data: {
