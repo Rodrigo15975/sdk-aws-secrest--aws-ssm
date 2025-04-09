@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { PrismaModule } from 'nestjs-prisma'
 import { AwsModule } from './module/aws/aws.module'
-import { AwsService } from './module/aws/aws.service'
 import { UsersModule } from './module/users/users.module'
 
 @Module({
