@@ -20,23 +20,22 @@ import { UsersModule } from './module/users/users.module'
   providers: [],
 })
 export class AppModule {
-  constructor(private readonly awsService: AwsService) {}
-
-  async onModuleInit() {
-    // const secrets = await this.awsService.getSecretManager(
-    //   'nestjs-db-credentials',
-    // )
-    // console.log({
-    //   secrets,
-    // })
-    // for (const [key, value] of Object.entries(secrets)) {
-    //   if (!process.env[key]) {
-    //     process.env[key] = value
-    //     Logger.debug('Assigning secret: ' + key + ' = ' + value)
-    //   } else {
-    //     Logger.debug('Secret already assigned: ' + key + ' = ' + value)
-    //     process.env[key] = value
-    //   }
-    // }
-  }
+  // constructor(private readonly awsService: AwsService) {}
+  // async onModuleInit() {
+  // const secrets = await this.awsService.getSecretManager(
+  //   'nestjs-db-credentials',
+  // )
+  // console.log({
+  //   secrets,
+  // })
+  // for (const [key, value] of Object.entries(secrets)) {
+  //   if (!process.env[key]) {
+  //     process.env[key] = value
+  //     Logger.debug('Assigning secret: ' + key + ' = ' + value)
+  //   } else {
+  //     Logger.debug('Secret already assigned: ' + key + ' = ' + value)
+  //     process.env[key] = value
+  //   }
+  // }
+  // }
 }
