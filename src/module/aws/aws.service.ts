@@ -1,15 +1,12 @@
-import { Injectable, NotFoundException } from '@nestjs/common'
 import {
   CreateSecretCommand,
   GetSecretValueCommand,
-  PutSecretValueCommand,
   SecretsManagerClient,
 } from '@aws-sdk/client-secrets-manager'
 import { fromIni } from '@aws-sdk/credential-provider-ini'
+import { Injectable, NotFoundException } from '@nestjs/common'
 
 type Secrets = Record<string, string>
-
-type TypeCommand = 'create' | 'put'
 
 @Injectable()
 export class AwsService {
