@@ -29,9 +29,9 @@ export class AwsService {
     const result = await this.secretsManagerClient
       .send(command)
       .catch((error: ResourceNotFoundException) => {
-        if (error.name === 'ResourceNotFoundException') {
+        if (error.name === 'ResourceNotFoundException')
           throw new NotFoundException(`Secret "${secretId}" not found`)
-        }
+
         throw new InternalServerErrorException(
           'Error getting secret: ' + error.message,
         )
