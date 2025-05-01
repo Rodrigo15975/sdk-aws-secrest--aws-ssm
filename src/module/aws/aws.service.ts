@@ -1,10 +1,15 @@
 import {
   CreateSecretCommand,
   GetSecretValueCommand,
+  ResourceNotFoundException,
   SecretsManagerClient,
 } from '@aws-sdk/client-secrets-manager'
 import { fromIni } from '@aws-sdk/credential-provider-ini'
-import { Injectable, NotFoundException } from '@nestjs/common'
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common'
 
 type Secrets = Record<string, string>
 
@@ -16,7 +21,27 @@ export class AwsService {
   })
 
   async getSecretManager(secretId: string): Promise<Secrets> {
-    return await this.createCommandGetSecret(secretId)
+    const command = new GetSecretValueCommand({
+      SecretId: secretId,
+      VersionStage: 'AWSCURRENT',
+    })
+
+    const result = await this.secretsManagerClient
+      .send(command)
+      .catch((error: ResourceNotFoundException) => {
+        if (error.name === 'ResourceNotFoundException') {
+          throw new NotFoundException(`Secret "${secretId}" not found`)
+        }
+        throw new InternalServerErrorException(
+          'Error getting secret: ' + error.message,
+        )
+      })
+
+    if (!result.SecretString) {
+      throw new NotFoundException('Secret exists but is empty')
+    }
+
+    return JSON.parse(result.SecretString) as Secrets
   }
 
   async createSecretManager(secretId: string) {
