@@ -32,18 +32,6 @@ export class AwsService {
     const response = await this.secretsManagerClient.send(command)
     return response
   }
-  private typeCommandCreate(type: TypeCommand) {
-    if (type === 'put') {
-      return new PutSecretValueCommand({
-        SecretId: 'test',
-        SecretString: JSON.stringify({
-          username: 'admin',
-          password: 'admin',
-        }),
-      })
-    }
-  }
-
   private async createCommandGetSecret(SecretId: string) {
     const command = new GetSecretValueCommand({
       SecretId,
