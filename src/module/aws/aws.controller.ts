@@ -7,11 +7,7 @@ export class AwsController {
 
   @Get('secret/:secretId')
   async getSecret(@Param('secretId') secretId: string) {
-    const secrets = await this.awsService.getSecretManager(secretId)
-    console.log({
-      secrets,
-    })
-    return secrets
+    return await this.awsService.getSecretManager(secretId)
   }
   @Get('createSecret')
   async createSecret(@Query('secretId') secretId: string) {
