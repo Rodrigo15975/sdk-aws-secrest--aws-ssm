@@ -18,6 +18,7 @@ export class AwsService {
   async getSecretManager(secretId: string): Promise<Secrets> {
     return await this.createCommandGetSecret(secretId)
   }
+
   async createSecretManager(secretId: string) {
     const command = new CreateSecretCommand({
       Name: secretId,
