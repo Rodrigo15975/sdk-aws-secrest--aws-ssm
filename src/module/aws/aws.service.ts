@@ -43,7 +43,6 @@ export class AwsService {
       })
     }
   }
-  private typeCommandFunction() {}
 
   private async createCommandGetSecret(SecretId: string) {
     const command = new GetSecretValueCommand({
