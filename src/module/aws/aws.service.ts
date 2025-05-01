@@ -12,7 +12,7 @@ type Secrets = Record<string, string>
 export class AwsService {
   private readonly secretsManagerClient = new SecretsManagerClient({
     region: 'us-east-1',
-    credentials: fromIni({ profile: 'create-only-user' }),
+    credentials: fromIni({ profile: 'default' }),
   })
 
   async getSecretManager(secretId: string): Promise<Secrets> {
@@ -30,6 +30,7 @@ export class AwsService {
     const response = await this.secretsManagerClient.send(command)
     return response
   }
+
   private async createCommandGetSecret(SecretId: string) {
     const command = new GetSecretValueCommand({
       SecretId,
